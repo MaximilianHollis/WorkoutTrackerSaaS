@@ -25,6 +25,7 @@ mongoose.connect('mongodb://localhost:27017/workoutServer', { useNewUrlParser: t
 const apiRouter = require('./Routes/api.js');
 app.use('/api', apiRouter);
 
+
 app.listen(5000, () => {
     console.log('server initialized')
 })

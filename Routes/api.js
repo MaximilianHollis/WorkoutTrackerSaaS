@@ -27,10 +27,11 @@ apiRouter.post('/register', (req, res) => {
             res.status(400).json({ message: 'username taken' });
         }
         else {
-            const newUser = new User({ username, password, plan, verified: false });
+            const newUser = new User({ username, password, plan });
+            console.log(newUser)
             newUser.save(err => {
                 if (err)
-                    res.status(500).json({ message: 'an unexpected error has occured' });
+                    res.status(500).json({ message: 'an unexpected error has occured. Could not be registered.' });
                 else
                     res.status(201).json({ message: 'account successfully created' });
             });
