@@ -1,13 +1,13 @@
 const express = require('express');
 const apiRouter = express.Router();
 const passport = require('passport');
-const passportConfig = require('../passport');
+const passportConfig = require('../Config/passport');
 const JWT = require('jsonwebtoken');
-const User = require('../models/Users');
-const Workout = require('../models/Workouts');
+const User = require('../Models/Users');
+const Workout = require('../Models/Workouts');
 var cors = require('cors')
 
-apiRouter.use(cors({ origin: 'http://localhost:3000'}));
+apiRouter.use(cors({origin: 'http://localhost:3000'}));
 
 const signToken = userID => {
     return JWT.sign({

@@ -17,7 +17,8 @@
     "React",
     "Express",
     "Mongo",
-    "Node"
+    "Node",
+    "Lifestyle"
   ],
   "author": "Maximilian Hollis",
   "license": "ISC",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/MaximilianHollis/WorkoutTrackerSaaS#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -34,7 +36,9 @@
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.11",
     "morgan": "^1.10.0",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
