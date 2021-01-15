@@ -22,8 +22,11 @@ export default function Authentication() {
     const handleClick = (e, data, mode) => {
         e.preventDefault();
         if (data.password === data.confirmPassword){
+            if(!data.email.match(/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/)){
+                return console.log('email not valid')
+            }
             if (mode === 'register'){
-                AuthService.register({ username: data.username, password: data.password, plan: 'free' }).then(data => console.log(data))
+                AuthService.register({ username: data.username, password: data.password, email: data.email, plan: 'free' }).then(data => console.log(data))
             }
             if (mode === 'signin'){
                 AuthService.login({ username: data.username, password: data.password})
@@ -32,7 +35,6 @@ export default function Authentication() {
             console.log('not matching')
         }
     }
-
 
     return <AuthWrapper>
         <AuthCard>

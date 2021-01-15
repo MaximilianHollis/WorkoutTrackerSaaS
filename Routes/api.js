@@ -18,7 +18,7 @@ const signToken = userID => {
 
 //Registeration
 apiRouter.post('/register', (req, res) => {
-    const { username, password, plan } = req.body;
+    const { username, password, email, plan } = req.body;
     let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     console.log(password)
     if (!password.match(passw)) {
@@ -32,7 +32,8 @@ apiRouter.post('/register', (req, res) => {
                 res.status(400).json({ message: 'username taken' });
             }
             else {
-                const newUser = new User({ username, password, plan });
+                const newUser = new User({ username, password, email, plan });
+                console.log(newUser)
                 newUser.save(err => {
                     if (err)
                         res.status(500).json({ message: 'an unexpected error has occured. Could not be registered.' });
