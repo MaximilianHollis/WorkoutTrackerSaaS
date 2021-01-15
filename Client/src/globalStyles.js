@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   -moz-user-select: none;
   
   body {
-    background: #1c1e32
+    background: #f1f1f1
   } 
    
   body::-webkit-scrollbar {
@@ -38,7 +38,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   border-radius: 4px;
-  background: ${({ primary }) => (primary ? Theme.primary : Theme.secondary)};
+  background: #767ED9;
   white-space: nowrap;
   padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
   color: #fff;
@@ -46,17 +46,19 @@ export const Button = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  box-shadow: 2px 5px 5px 0px  #767ED990;
+
 
   &:hover {
-    transition: all 0.1s ease-out;
-    background: #fff;
-    background-color: ${({ primary }) => (primary ? Theme.primary + 99 : Theme.secondary + 99)};
+    transition: all 0.01s ease-out;
+    box-shadow: inset 0 0 5px #1c1e32;
   }
 
 `;
 
 export const Theme = {
   purple: '#767ED9',
+  darkPurple: '#1c1e32'
 
 /*   background: '#1c1e32',
   success: '#38D86A',

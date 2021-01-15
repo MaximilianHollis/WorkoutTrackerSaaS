@@ -7,36 +7,42 @@ const User = require('../Models/Users');
 const Workout = require('../Models/Workouts');
 var cors = require('cors')
 
-apiRouter.use(cors({origin: 'http://localhost:3000'}));
+apiRouter.use(cors({ origin: 'http://localhost:3000' }));
 
 const signToken = userID => {
     return JWT.sign({
         iss: "Maskify",
         sub: userID
-    }, "WorkoutTracker", { expiresIn: "24h"});
+    }, "WorkoutTracker", { expiresIn: "24h" });
 }
 
 //Registeration
 apiRouter.post('/register', (req, res) => {
     const { username, password, plan } = req.body;
-    User.findOne({ username }, (err, user) => {
-        if (err) {
-            res.status(500).json({ message: 'an unexpected error has occured'});
-        }
-        if (user) {
-            res.status(400).json({ message: 'username taken' });
-        }
-        else {
-            const newUser = new User({ username, password, plan });
-            console.log(newUser)
-            newUser.save(err => {
-                if (err)
-                    res.status(500).json({ message: 'an unexpected error has occured. Could not be registered.' });
-                else
-                    res.status(201).json({ message: 'account successfully created' });
-            });
-        }
-    });
+    let passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    console.log(password)
+    if (!password.match(passw)) {
+        res.status(400).json({ message: 'Password must contain one lowercase letter, one uppercase letter, one numeric digit, and one special character' });
+    } else {
+        User.findOne({ username }, (err, user) => {
+            if (err) {
+                res.status(500).json({ message: 'an unexpected error has occured' });
+            }
+            if (user) {
+                res.status(400).json({ message: 'username taken' });
+            }
+            else {
+                const newUser = new User({ username, password, plan });
+                newUser.save(err => {
+                    if (err)
+                        res.status(500).json({ message: 'an unexpected error has occured. Could not be registered.' });
+                    else
+                        res.status(201).json({ message: 'account successfully created' });
+                });
+            }
+        });
+    }
+
 });
 
 //Login
@@ -59,25 +65,25 @@ apiRouter.get('/logout', passport.authenticate('jwt', { session: false }), (req,
 //CRUD OPERATIONS
 
 //Create a workout
-apiRouter.post('/workout', passport.authenticate('jwt', {session: false}), (req, res) => {
+apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
     const newWorkout = new Workout(req.body);
     newWorkout.save(err => {
-        if(err){
-            res.status(500).json({message: 'an unexpected error occured'})
+        if (err) {
+            res.status(500).json({ message: 'an unexpected error occured' })
         } else {
-            res.status(200).json({message: 'successfully created a new workout'})
+            res.status(200).json({ message: 'successfully created a new workout' })
         }
     });
 });
 
 //Read all workouts
 
-apiRouter.get('/workout', passport.authenticate('jwt', {session: false}), (req, res) => {
-    User.findById({_id: req.user._id}).populate('workouts').exec((err, document) => {
-        if(err){
-            res.status(500).json({message: 'an unexpected error has occured'});
-        } else{
-            res.status(200).json({workouts: document.workouts, authenticated: true});
+apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
+    User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
+        if (err) {
+            res.status(500).json({ message: 'an unexpected error has occured' });
+        } else {
+            res.status(200).json({ workouts: document.workouts, authenticated: true });
         }
     });
 });
