@@ -26,5 +26,6 @@ export const AuthBackground = styled.div`
     float: right;
 `
 export const AuthButton = styled(Button)`
-    
+    margin-top: 5%;
+    width: 100%;
 `

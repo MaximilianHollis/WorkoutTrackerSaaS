@@ -21,13 +21,10 @@ export default function Authentication({mode}) {
     //  AuthService.register({username: 'a', password: 'a', plan: 'free'}).then(data => {
 
     const handleClick = (e, data, mode) => {
-        e.preventDefault();
-
         if (mode === 'register') {
             if (data.password === data.confirmPassword) {
                 if (data.email.match(/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/)) {
                     AuthService.register({ username: data.username, password: data.password, email: data.email, plan: 'free' }).then(data => {
-                        console.log(data)
                         data.success ? router.push('/') : null})
                 } else {
                     console.log('email is invalid')
@@ -36,9 +33,10 @@ export default function Authentication({mode}) {
                 console.log('password does not match')
             }
         }
-
-        if (mode === 'signin') {
-            AuthService.login({ username: data.username, password: data.password })
+        if (mode === 'login') {
+            AuthService.login({ username: data.username, password: data.password }).then(data => {
+                data.success ? router.push('/') : null
+            })
         }
     }
 
@@ -46,6 +44,7 @@ export default function Authentication({mode}) {
         <AuthCard>
             {mode === 'register' ?
                 <form>
+                    Please register
                     <Input
                         type="text"
                         label="enter username"
@@ -76,6 +75,7 @@ export default function Authentication({mode}) {
                 </form>
                 :
                 <form>
+                    Please log in
                     <Input
                         type="text"
                         label="enter username"

@@ -1,7 +1,7 @@
  export default {
     login: user => {
         console.log(user);
-        return fetch('localhost:5000/api/login', {
+        return fetch('http://localhost:5000/api/login', {
             method: "post",
             body: JSON.stringify(user),
             headers: {
@@ -26,12 +26,12 @@
             .then(data => data);
     },
     logout: () => {
-        return fetch('localhost:5000/api/logout')
+        return fetch('http://localhost:5000/api/logout')
             .then(res => res.json())
             .then(data => data);
     },
     isAuthenticated: () => {
-        return fetch('localhost:5000/api/authenticated')
+        return fetch('http://localhost:5000/api/authenticated')
             .then(res => {
                 if (res.status !== 401)
                     return res.json().then(data => data);
