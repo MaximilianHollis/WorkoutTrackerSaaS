@@ -38,7 +38,7 @@ apiRouter.post('/register', (req, res) => {
                     if (err)
                         res.status(500).json({ message: 'an unexpected error has occured. Could not be registered.' });
                     else
-                        res.status(201).json({ message: 'account successfully created' });
+                        res.status(201).json({ message: 'account successfully created', success: true });
                 });
             }
         });
@@ -53,7 +53,7 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
         const token = signToken(_id);
         //not production grade code
         res.setHeader('set-cookie', `access_token=${token}`)
-        res.status(200).json({ isAuthenticated: true, user: { username, plan } });
+        res.status(200).json({ isAuthenticated: true, user: { username, plan }, success: true });
     }
 });
 
@@ -72,7 +72,7 @@ apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (re
         if (err) {
             res.status(500).json({ message: 'an unexpected error occured' })
         } else {
-            res.status(200).json({ message: 'successfully created a new workout' })
+            res.status(200).json({ message: 'successfully created a new workout', success: true })
         }
     });
 });
@@ -84,7 +84,7 @@ apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req
         if (err) {
             res.status(500).json({ message: 'an unexpected error has occured' });
         } else {
-            res.status(200).json({ workouts: document.workouts, authenticated: true });
+            res.status(200).json({ workouts: document.workouts, authenticated: true, success: true });
         }
     });
 });
