@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Input from '../Input'
 import WorkingOut from '../../../public/images/authentication-working-out-undraw.svg'
 import AuthService from '../../Services/AuthService';
+import AuthContext from '../../Contexts/AuthContext'
 
 import {
     AuthWrapper,
@@ -19,7 +20,8 @@ export default function Authentication({ mode }) {
     //router
     const router = useRouter()
     const [credentials, setCredentials] = useState({ username: '', email: '', password: '', confirmPassword: '' })
-    //  AuthService.register({username: 'a', password: 'a', plan: 'free'}).then(data => {
+    //auth context
+    const {token, login, logout} = useContext(AuthContext)
 
     const handleClick = (data, mode) => {
         if (mode === 'register') {
@@ -37,8 +39,8 @@ export default function Authentication({ mode }) {
         }
         if (mode === 'login') {
             AuthService.login({ username: data.username, password: data.password }).then(data => {
-                console.log(data.token)
-                data.success ? router.push('/dashboard') : null
+                login(data.token)
+                data.success ? router.push('/pricing') : null
             })
         }
     }

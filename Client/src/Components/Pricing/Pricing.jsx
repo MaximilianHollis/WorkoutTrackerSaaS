@@ -1,4 +1,6 @@
+import { token } from 'morgan'
 import React, { useState, useContext, useEffect } from 'react'
+import AuthContext from '../../Contexts/AuthContext'
 
 import {
     PricingWrapper,
@@ -10,10 +12,10 @@ import {
 
 
 export default function Pricing({ }) {
-
+    const {token} = useContext(AuthContext)
 
     const handleClick = () => {
-        
+        console.log(token)
     }
 
     return <PricingWrapper>
