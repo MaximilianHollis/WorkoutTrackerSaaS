@@ -11,7 +11,7 @@
             if (res.status !== 401)
                 return res.json().then(data => data);
             else
-                return { isAuthenticated: false, user: { username: "", role: "" } };
+                return { isAuthenticated: false, user: { username: "", plan: "", token: '' } };
         })
     },
     register: user => {
@@ -30,13 +30,17 @@
             .then(res => res.json())
             .then(data => data);
     },
-    authenticate: () => {
-        return fetch('http://localhost:5000/api/authenticated')
+    authenticate: (user) => {
+        return fetch('http://localhost:5000/api/authenticated', {
+            headers: {
+                'Authorization': 'Bearer' + user.token
+            }
+        })
             .then(res => {
                 if (res.status !== 401)
                     return res.json().then(data => data);
                 else
-                    return { isAuthenticated: false, user: { username: "", role: "" } };
+                    return { isAuthenticated: false, user: { username: '', plan: '', token: '' } };
             });
     }
 

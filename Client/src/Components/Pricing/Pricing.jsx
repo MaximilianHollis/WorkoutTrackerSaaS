@@ -12,10 +12,10 @@ import {
 
 
 export default function Pricing({ }) {
-    const {token} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
 
     const handleClick = () => {
-        console.log(token)
+        console.log(user)
     }
 
     const test = () => {

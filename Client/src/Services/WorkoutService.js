@@ -1,6 +1,6 @@
 export default {
     getWorkouts: () => {
-        return fetch('http://localhost:5000/api/workout')
+        return fetch('http://localhost:3000/api/workout')
             .then(response => {
                 if(response.status !== 401){
                     return response.json().then(data => data);
@@ -10,7 +10,7 @@ export default {
             })
     },
     postWorkouts: () => {
-        return fetch('http://localhost:5000/api/login', {
+        return fetch('http://localhost:3000/api/login', {
             method: 'post',
             body: JSON.stringify(data),
             headers: {

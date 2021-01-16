@@ -6,16 +6,16 @@ const AuthContext = React.createContext();
 
 export const AuthProvider = props => {
     const [token, setToken] = useLocalStorageState('access_token', '')
-    const [user, setUser] = useState(null);
-/*     const [isAuthenticated, setIsAuthenticated] = useState(false);
- */    const [isLoaded, setIsLoaded] = useState(false);
+    const [user, setUser] = useLocalStorageState('user', {username: '', plan: '', token: ''});
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-/*     useEffect(()=>{
-        AuthService.authenticate({username: '', plan: 'noob', token: 'urmom'}).then(data => console.log(data))
-    },[]); */
+    useEffect(()=>{
+        AuthService.authenticate(user).then(data => console.log(data))
+    },[]);
 
-    const login = newToken => {
-        setToken(newToken)
+    const login = data => {
+        setUser(data)
     }
 
     const logout = () => {
@@ -24,8 +24,7 @@ export const AuthProvider = props => {
 
     return(
         <AuthContext.Provider value={{
-            token, login, logout,
-            user, setUser, 
+            user, login, logout
         }}>
             {props.children}
         </AuthContext.Provider>

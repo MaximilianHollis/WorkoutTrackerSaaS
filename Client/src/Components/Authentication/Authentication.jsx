@@ -28,7 +28,7 @@ export default function Authentication({ mode }) {
             if (data.password === data.confirmPassword) {
                 if (data.email.match(/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/)) {
                     AuthService.register({ username: data.username, password: data.password, email: data.email, plan: 'free' }).then(data => {
-                        data.success ? router.push('/pricing') : null
+                        data.success ? router.push('/plans') : null
                     })
                 } else {
                     console.log('email is invalid')
@@ -39,8 +39,8 @@ export default function Authentication({ mode }) {
         }
         if (mode === 'login') {
             AuthService.login({ username: data.username, password: data.password }).then(data => {
-                login(data.token)
-                data.success ? router.push('/pricing') : null
+                login(data)
+                data.success ? router.push('/plans') : null
             })
         }
     }

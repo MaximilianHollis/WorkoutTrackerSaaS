@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/dashboard": "pages/dashboard.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/plans": "pages/plans.js"
+  "/plans": "pages/plans.js",
+  "/authentication": "pages/authentication.js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }
