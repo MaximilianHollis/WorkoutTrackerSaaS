@@ -1,6 +1,7 @@
 import { token } from 'morgan'
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from '../../Contexts/AuthContext'
+import WorkoutService from '../../Services/WorkoutService'
 
 import {
     PricingWrapper,
@@ -18,6 +19,10 @@ export default function Pricing({ }) {
         console.log(token)
     }
 
+    const test = () => {
+        WorkoutService.postWorkouts({})
+    }
+
     return <PricingWrapper>
         <PricingCardWrapper>
             <PricingCard>
@@ -27,7 +32,7 @@ export default function Pricing({ }) {
                 Premium
                 <PricingButton onClick={() => handleClick()}>Purchase</PricingButton>
             </PricingCard>
-            <PricingCard>
+            <PricingCard onClick={test}>
                 Gimme money
             </PricingCard>
         </PricingCardWrapper>

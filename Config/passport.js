@@ -5,6 +5,7 @@ const User = require('../Models/Users');
 
 const cookieExtractor = req => {
     let token = null;
+    console.log(req.token)
     if (req && req.cookies) {
         token = req.cookies["access_token"];
     }
@@ -29,7 +30,7 @@ passport.use(new JwtStrategy({
 // authenticated local strategy using username and password
 passport.use(new LocalStrategy((username, password, done) => {
     User.findOne({ username }, (err, user) => {
-        // something went wrong with database
+        // someting went wrong with database
         if (err)
             return done(err);
         // if no user exist
