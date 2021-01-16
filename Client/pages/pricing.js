@@ -1,8 +1,8 @@
 import react, { useState, useContext } from 'react'
-import Authentication from '../src/Components/Authentication/Authentication'
+import Pricing from '../src/Components/Pricing/Pricing'
 
-export default function Pricing() {
+export default function PricingPage() {
   return <>
-    <Authentication mode='login' />
+    <Pricing/>
   </>
 }

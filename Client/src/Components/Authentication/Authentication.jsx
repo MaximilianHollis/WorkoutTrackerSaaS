@@ -8,24 +8,26 @@ import {
     AuthWrapper,
     AuthCard,
     AuthBackground,
-    AuthButton
-
+    AuthButton,
+    AuthTitle,
+    AuthSubtitle
 } from './Authentication.elements'
 
 
 
-export default function Authentication({mode}) {
+export default function Authentication({ mode }) {
     //router
     const router = useRouter()
     const [credentials, setCredentials] = useState({ username: '', email: '', password: '', confirmPassword: '' })
     //  AuthService.register({username: 'a', password: 'a', plan: 'free'}).then(data => {
 
-    const handleClick = (e, data, mode) => {
+    const handleClick = (data, mode) => {
         if (mode === 'register') {
             if (data.password === data.confirmPassword) {
                 if (data.email.match(/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/)) {
                     AuthService.register({ username: data.username, password: data.password, email: data.email, plan: 'free' }).then(data => {
-                        data.success ? router.push('/') : null})
+                        data.success ? router.push('/pricing') : null
+                    })
                 } else {
                     console.log('email is invalid')
                 }
@@ -35,7 +37,7 @@ export default function Authentication({mode}) {
         }
         if (mode === 'login') {
             AuthService.login({ username: data.username, password: data.password }).then(data => {
-                data.success ? router.push('/') : null
+                data.success ? router.push('/dashboard') : null
             })
         }
     }
@@ -44,7 +46,15 @@ export default function Authentication({mode}) {
         <AuthCard>
             {mode === 'register' ?
                 <form>
-                    Please register
+                    <AuthTitle>Please register</AuthTitle>
+                    <AuthSubtitle>
+                        <ul>
+                            <li>8 character minimum</li>
+                            <li>mix case</li>
+                            <li>a number</li>
+                            <li>a special character</li>
+                        </ul>
+                    </AuthSubtitle>
                     <Input
                         type="text"
                         label="enter username"
@@ -75,7 +85,9 @@ export default function Authentication({mode}) {
                 </form>
                 :
                 <form>
-                    Please log in
+                    <AuthTitle>
+                        Welcome back
+                    </AuthTitle>
                     <Input
                         type="text"
                         label="enter username"
@@ -92,7 +104,7 @@ export default function Authentication({mode}) {
                 </form>
             }
 
-            <AuthButton onClick={(e) => handleClick(e, credentials, mode)}>Submit</AuthButton>
+            <AuthButton onClick={() => handleClick(credentials, mode)}>Submit</AuthButton>
         </AuthCard>
         <AuthBackground backgroundImg={WorkingOut} />
     </AuthWrapper>

@@ -15,6 +15,15 @@ export const AuthCard = styled.div`
     float: left;
 `
 
+export const AuthTitle = styled.h2`
+    color: #f1f1f1;
+`
+
+export const AuthSubtitle = styled.p`
+    padding-left: 20px;
+    color: #f1f1f1;
+`
+
 export const AuthBackground = styled.div`
     background: #f1f1f1;
     background-image: ${({ backgroundImg }) => (backgroundImg ? `url(${backgroundImg})` : null)};
