@@ -37,6 +37,7 @@ export default function Authentication({ mode }) {
         }
         if (mode === 'login') {
             AuthService.login({ username: data.username, password: data.password }).then(data => {
+                console.log(data.token)
                 data.success ? router.push('/dashboard') : null
             })
         }

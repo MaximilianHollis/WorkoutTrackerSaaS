@@ -3,23 +3,30 @@ import React, { useState, useContext, useEffect } from 'react'
 import {
     PricingWrapper,
     PricingCard,
-    PricingCardWrapper
+    PricingCardWrapper,
+    PricingButton
 
 } from './Pricing.elements'
 
 
 export default function Pricing({ }) {
 
+
+    const handleClick = () => {
+        
+    }
+
     return <PricingWrapper>
         <PricingCardWrapper>
             <PricingCard>
-                g
+                El Cheapo
             </PricingCard>
-            <PricingCard color='highlight'>
-                g
+            <PricingCard highlight>
+                Premium
+                <PricingButton onClick={() => handleClick()}>Purchase</PricingButton>
             </PricingCard>
             <PricingCard>
-                g
+                Gimme money
             </PricingCard>
         </PricingCardWrapper>
     </PricingWrapper>

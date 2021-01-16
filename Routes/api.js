@@ -52,8 +52,7 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
         const { _id, username, plan } = req.user;
         const token = signToken(_id);
         //not production grade code
-        res.setHeader('set-cookie', `access_token=${token}`)
-        res.status(200).json({ isAuthenticated: true, user: { username, plan }, success: true });
+        res.status(200).json({ isAuthenticated: true, user: { username, plan }, success: true, token: token });
     }
 });
 
@@ -92,6 +91,15 @@ apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req
 //Update a workout
 
 //Delete a workout
+
+
+
+
+
+//PAYMENT
+
+//Single payment
+
 
 
 module.exports = apiRouter;

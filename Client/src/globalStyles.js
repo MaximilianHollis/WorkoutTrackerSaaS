@@ -48,11 +48,11 @@ export const Button = styled.button`
   cursor: pointer;
   box-shadow: 2px 5px 5px 0px  #767ED990;
 
-
   &:hover {
     transition: all 0.01s ease-out;
     box-shadow: inset 0 0 5px #1c1e32;
   }
+
 
 `;
 

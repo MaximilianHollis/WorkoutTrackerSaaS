@@ -18,7 +18,15 @@ export const PricingCard = styled.div`
     width: 25%;
     padding: 5%;
     border-radius: 40px 10px 40px 10px;
-    background: ${({color}) => color === 'highlight' ? Theme.purple : Theme.darkPurple};
-    
-    box-shadow: 20px 25px 10px 0px  ${({color}) => color === 'highlight' ? Theme.purple + 90 : Theme.darkPurple + 90} ;
+    background: ${({highlight}) => highlight ? Theme.purple : Theme.darkPurple};
+    box-shadow:   ${({highlight}) => highlight ? `10px 15px 5px 0px` + Theme.purple + 90 : `10px 15px 10px 0px` + Theme.darkPurple + 90} ;
+`
+
+export const PricingButton = styled(Button)`
+    width: 100%;
+    box-shadow: inset 0 0 5px #1c1e32;
+
+    &:hover {
+        background: ${Theme.darkPurple}
+    }
 `
