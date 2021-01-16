@@ -1,5 +1,3 @@
-import { response } from "express"
-
 export default {
     getWorkouts: () => {
         return fetch('http://localhost:5000/api/workout')

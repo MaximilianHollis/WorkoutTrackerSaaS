@@ -1,4 +1,3 @@
-import { token } from 'morgan'
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from '../../Contexts/AuthContext'
 import WorkoutService from '../../Services/WorkoutService'

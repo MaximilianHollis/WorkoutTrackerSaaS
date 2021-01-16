@@ -56,6 +56,13 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
     }
 });
 
+//Confirmation of Authentication
+
+apiRouter.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { username, plan, token } = req.user;
+    res.status(200).json({ isAuthenticated: true, user: { username, plan, token } });
+});
+
 //Logout
 apiRouter.get('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.setHeader('set-cookie', `access_token=null`)

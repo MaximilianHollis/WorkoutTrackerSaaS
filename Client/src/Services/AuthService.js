@@ -30,7 +30,7 @@
             .then(res => res.json())
             .then(data => data);
     },
-    isAuthenticated: () => {
+    authenticate: () => {
         return fetch('http://localhost:5000/api/authenticated')
             .then(res => {
                 if (res.status !== 401)
