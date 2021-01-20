@@ -59,7 +59,6 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
 //Confirmation of Authentication
 
 apiRouter.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log('h' + req.headers.authorization)
     const { username, plan, token } = req.user;
     res.status(200).json({ isAuthenticated: true, user: { username, plan, token } });
 });

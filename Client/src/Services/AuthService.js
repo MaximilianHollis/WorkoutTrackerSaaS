@@ -33,7 +33,7 @@
     authenticate: (user) => {
         return fetch('http://localhost:5000/api/authenticated', {
             headers: {
-                'Authorization': 'Bearer' + user.token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {
