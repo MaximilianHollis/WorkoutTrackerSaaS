@@ -1,6 +1,8 @@
  export default {
     login: user => {
-        console.log(user);
+        if(!user){
+            return
+        }
         return fetch('http://localhost:5000/api/login', {
             method: "post",
             body: JSON.stringify(user),
@@ -32,11 +34,14 @@
     },
     authenticate: (user) => {
         return fetch('http://localhost:5000/api/authenticated', {
+            method: "get",
             headers: {
-                'Authorization': 'Bearer ' + user.token
+                'Content-Type': 'application/json',
+                'Authentication': 'Bearer' + user.token
             }
         })
             .then(res => {
+                console.log(res)
                 if (res.status !== 401)
                     return res.json().then(data => data);
                 else

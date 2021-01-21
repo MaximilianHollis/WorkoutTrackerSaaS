@@ -11,7 +11,7 @@ apiRouter.use(cors({ origin: 'http://localhost:3000' }));
 
 const signToken = userID => {
     return JWT.sign({
-        iss: "Maskify",
+        iss: "Workout",
         sub: userID
     }, "WorkoutTracker", { expiresIn: "24h" });
 }
@@ -58,9 +58,9 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
 
 //Confirmation of Authentication
 
-apiRouter.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { username, plan, token } = req.user;
-    res.status(200).json({ isAuthenticated: true, user: { username, plan, token } });
+apiRouter.get('/authenticated', /* passport.authenticate('jwt', { session: false }), */ (req, res) => {
+    console.log(req.headers)
+    res.status(200).json({ isAuthenticated: true, user: { username: 'urmom' } });
 });
 
 //Logout

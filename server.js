@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan')
 app.use(cookieParser());
 app.use(express.json());
-app.use(morgan('tiny'))
+app.use(morgan('combined'))
 
 app.use((req, res, next) => {
     //TODO
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-mongoose.connect('mongodb://localhost:27017/workoutServer', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect('mongodb://localhost:27017/WorfffkoutServer', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log('Connected to DB');
 });
 
