@@ -33,14 +33,14 @@
             .then(data => data);
     },
     authenticate: (user) => {
+        console.l
         return fetch('http://localhost:5000/api/authenticated', {
             method: "get",
             headers: {
                 'Content-Type': 'application/json',
-                'Authentication': 'Bearer' + user.token
+                'Authorization': 'Bearer ' + user.token
             }
-        })
-            .then(res => {
+        }).then(res => {
                 console.log(res)
                 if (res.status !== 401)
                     return res.json().then(data => data);
