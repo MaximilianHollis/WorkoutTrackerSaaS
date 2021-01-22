@@ -59,7 +59,6 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
 //Confirmation of Authentication
 
 apiRouter.get('/authenticated', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.headers)
     res.status(200).json({ isAuthenticated: true, user: { username: 'thank god its workong' } });
 });
 
@@ -85,6 +84,7 @@ apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (re
 //Read all workouts
 
 apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
+    console.log(req.user)
     User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error has occured' });

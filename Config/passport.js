@@ -6,7 +6,6 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../Models/Users');
 
 passport.use(new JwtStrategy({
-    //not prod
     issuer: "Workout",
     secretOrKey: "WorkoutTracker",
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -15,8 +14,10 @@ passport.use(new JwtStrategy({
     User.findById({ _id: payload.sub }, (err, user) => {
         if (err)
             return done(err, false);
-        if (user)
+        if (user){
+            console.log('success' + payload.sub)
             return done(null, user);
+        }
         else
             return done(null, false);
     });

@@ -3,9 +3,10 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const morgan = require('morgan')
+
 app.use(cookieParser());
 app.use(express.json());
-app.use(morgan('combined'))
+app.use(morgan('tiny'))
 
 app.use((req, res, next) => {
     //TODO
@@ -17,7 +18,12 @@ app.use((req, res, next) => {
     next();
 });
 
-mongoose.connect('mongodb://localhost:27017/WorfffkoutServer', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+
+mongoose.connect(process.env.MongodbSrv, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log('Connected to DB');
 });
 
@@ -26,6 +32,6 @@ const apiRouter = require('./Routes/api.js');
 app.use('/api', apiRouter);
 
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('server initialized')
 })

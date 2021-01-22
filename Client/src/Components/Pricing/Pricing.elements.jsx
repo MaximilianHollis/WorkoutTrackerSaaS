@@ -15,7 +15,7 @@ export const PricingCardWrapper = styled.div`
 
 export const PricingCard = styled.div`
     background: #fff;
-    width: 25%;
+    width: 800px;
     padding: 5%;
     border-radius: 40px 10px 40px 10px;
     background: ${({highlight}) => highlight ? Theme.purple : Theme.darkPurple};
