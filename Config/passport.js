@@ -15,7 +15,6 @@ passport.use(new JwtStrategy({
         if (err)
             return done(err, false);
         if (user){
-            console.log('success' + payload.sub)
             return done(null, user);
         }
         else

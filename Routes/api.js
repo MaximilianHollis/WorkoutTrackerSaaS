@@ -80,7 +80,7 @@ apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (re
             req.user.workouts.push(newWorkout);
             req.user.save(err => {
                 if (err) {
-                    res.status(200).json({ message: 'user not found', success: false })
+                    res.status(500).json({ message: 'user not found', success: false })
                 } else {
                     res.status(200).json({ message: 'successfully created a new workout', success: true })
                 }
@@ -103,6 +103,17 @@ apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req
 });
 
 //Update a workout
+apiRouter.patch('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const newWorkout = req.body.workout;
+    Workout.findByIdAndUpdate(req.body.id, newWorkout, err => {
+        if(err){
+            res.status(500).json({ message: 'changes could not be saved', success: false })
+        } else {
+            res.status(200).json({message: 'changes successfully saved', success: true})
+        }
+    })  
+});
+
 
 //Delete a workout
 
