@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
         enum: ['free', 'premium'],
         required: true
     },
-    workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workouts' }],
+    workouts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Workout' }],
 });
 
 UserSchema.pre('save', function (next) {

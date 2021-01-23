@@ -71,12 +71,20 @@ apiRouter.get('/logout', passport.authenticate('jwt', { session: false }), (req,
 
 //Create a workout
 apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     const newWorkout = new Workout(req.body);
     newWorkout.save(err => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error occured' })
         } else {
-            res.status(200).json({ message: 'successfully created a new workout', success: true })
+            req.user.workouts.push(newWorkout);
+            req.user.save(err => {
+                if (err) {
+                    res.status(200).json({ message: 'user not found', success: false })
+                } else {
+                    res.status(200).json({ message: 'successfully created a new workout', success: true })
+                }
+            })
         }
     });
 });
@@ -84,7 +92,7 @@ apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (re
 //Read all workouts
 
 apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.user)
+    console.log(req.user._id)
     User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error has occured' });
