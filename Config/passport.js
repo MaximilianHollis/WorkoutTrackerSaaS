@@ -10,8 +10,8 @@ passport.use(new JwtStrategy({
     secretOrKey: "WorkoutTracker",
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 
-}, (payload, done) => {
-    User.findById({ _id: payload.sub }, (err, user) => {
+}, async(payload, done) => {
+    await User.findById({ _id: payload.sub }, (err, user) => {
         if (err)
             return done(err, false);
         if (user){

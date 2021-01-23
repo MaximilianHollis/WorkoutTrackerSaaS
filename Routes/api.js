@@ -51,7 +51,6 @@ apiRouter.post('/login', passport.authenticate('local', { session: false }), (re
     if (req.isAuthenticated()) {
         const { _id, username, plan } = req.user;
         const token = signToken(_id);
-        //not production grade code
         res.status(200).json({ isAuthenticated: true, user: { username, plan }, success: true, token: token });
     }
 });
@@ -71,8 +70,7 @@ apiRouter.get('/logout', passport.authenticate('jwt', { session: false }), (req,
 
 //Create a workout
 apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-
-    const newWorkout = new Workout(req.body);
+    const newWorkout = new Workout(req.body.workout);
     newWorkout.save(err => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error occured' })
@@ -89,34 +87,47 @@ apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (re
     });
 });
 
-//Read all workouts
 
+//Read all workouts
 apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.user._id)
     User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
         if (err) {
-            res.status(500).json({ message: 'an unexpected error has occured' });
+            res.status(500).json({ message: 'an unexpected error has occured', success: false });
         } else {
             res.status(200).json({ workouts: document.workouts, authenticated: true, success: true });
         }
     });
 });
 
+
 //Update a workout
 apiRouter.patch('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const newWorkout = req.body.workout;
-    Workout.findByIdAndUpdate(req.body.id, newWorkout, err => {
-        if(err){
-            res.status(500).json({ message: 'changes could not be saved', success: false })
+    const idToModify = req.body.id;
+    const workout = req.body.workout;
+    const newWorkout = {type: workout.type, duration: workout.duration, time: workout.time}
+    User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
+        if (err) {
+            res.status(500).json({ message: 'an unexpected error has occured', success: false });
         } else {
-            res.status(200).json({message: 'changes successfully saved', success: true})
+            if (document.workouts.filter(w => w._id == idToModify)) {
+                Workout.findByIdAndUpdate(idToModify, newWorkout, {new: false}).exec(err => {
+                    if (err)
+                        res.status(500).json({ message: err, success: false });
+                    else
+                        res.status(200).json({ message: 'changes saved sucessfully', success: true });
+                })
+            } else {
+                res.status(400).json({message: 'changes are unauthorized', success: false})
+            }
         }
-    })  
+    });
 });
 
 
 //Delete a workout
+apiRouter.delete('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
 
+});
 
 
 

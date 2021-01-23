@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-mongoose.connect(process.env.MongodbSrv, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect(process.env.MongodbSrv, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
     console.log('Connected to DB');
 });
 
