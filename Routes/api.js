@@ -104,29 +104,44 @@ apiRouter.get('/workout', passport.authenticate('jwt', { session: false }), (req
 apiRouter.patch('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
     const idToModify = req.body.id;
     const workout = req.body.workout;
-    const newWorkout = {type: workout.type, duration: workout.duration, time: workout.time}
+    const newWorkout = { type: workout.type, duration: workout.duration, time: workout.time }
     User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error has occured', success: false });
         } else {
             if (document.workouts.filter(w => w._id == idToModify)) {
-                Workout.findByIdAndUpdate(idToModify, newWorkout, {new: false}).exec(err => {
+                Workout.findByIdAndUpdate(idToModify, newWorkout, { new: false }).exec(err => {
                     if (err)
                         res.status(500).json({ message: err, success: false });
                     else
                         res.status(200).json({ message: 'changes saved sucessfully', success: true });
                 })
             } else {
-                res.status(400).json({message: 'changes are unauthorized', success: false})
+                res.status(400).json({ message: 'changes are unauthorized', success: false })
             }
         }
     });
 });
 
-
 //Delete a workout
 apiRouter.delete('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-
+    const idToDelete = req.body.id;
+    User.findById({ _id: req.user._id }).populate('workouts').exec((err, document) => {
+        if (err)
+            res.status(500).json({ message: 'an unexpected error has occured', success: false });
+        else {
+            if (document.workouts.filter(w => w._id == idToDelete)) {
+                Workout.findByIdAndRemove(idToDelete).exec(err => {
+                    if (err)
+                        res.status(500).json({ message: 'Could not be deleted', success: false });
+                    else
+                        res.status(200).json({ message: 'changes saved sucessfully', success: true });
+                })
+            } else {
+                res.status(400).json({ message: 'changes are unauthorized', success: false })
+            }
+        }
+    })
 });
 
 
