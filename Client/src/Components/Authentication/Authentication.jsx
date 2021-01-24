@@ -21,7 +21,7 @@ export default function Authentication({ mode }) {
     const router = useRouter()
     const [credentials, setCredentials] = useState({ username: '', email: '', password: '', confirmPassword: '' })
     //auth context
-    const {token, login, logout} = useContext(AuthContext)
+    const {login, logout} = useContext(AuthContext)
 
     const handleClick = (data, mode) => {
         if (mode === 'register') {

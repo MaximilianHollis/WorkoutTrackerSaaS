@@ -33,7 +33,6 @@
             .then(data => data);
     },
     authenticate: (user) => {
-        console.l
         return fetch('http://localhost:5000/api/authenticated', {
             method: "get",
             headers: {

@@ -5,7 +5,6 @@ import { AuthProvider} from '../src/Contexts/AuthContext'
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <script src="cssesc.js"></script>
       <GlobalStyle />
       <ThemeProvider theme={Theme}>
         <AuthProvider>

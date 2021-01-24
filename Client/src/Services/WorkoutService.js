@@ -1,11 +1,16 @@
 export default {
-    getWorkouts: token => {
-        return fetch('http://localhost:3000/api/workout')
+    getWorkouts: user => {
+        return fetch('http://localhost:5000/api/workout', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.token
+            }
+        })
             .then(response => {
-                if(response.status !== 401){
+                if (response.status !== 401) {
                     return response.json().then(data => data);
                 } else {
-                    return { message: "Unauthorized", success: false}
+                    return { message: "Unauthorized", success: false }
                 }
             })
     },
@@ -16,13 +21,12 @@ export default {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + user.token
-
             }
         }).then(response => {
-            if(response.status !== 401){
+            if (response.status !== 401) {
                 return response.json().then(data => data);
             } else {
-                return { message: 'Unauthorized'}
+                return { message: 'Unauthorized' }
             }
         })
     }

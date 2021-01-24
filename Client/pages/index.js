@@ -7,7 +7,7 @@ const Title = styled.h1`
 `
 
 const onSubmit = e => {
-  AuthService.register({username: 'a', password: 'a', plan: 'free'}).then(data => {
+  AuthService.register({username: '', password: 'a', plan: 'free'}).then(data => {
     console.log(data);
   });
 }

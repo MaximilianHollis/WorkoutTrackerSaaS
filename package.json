@@ -41,7 +41,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "stripe": "^8.131.1",
+    "stripe": "^8.132.0",
     "use-local-storage-state": "^6.0.3"
   },
   "devDependencies": {

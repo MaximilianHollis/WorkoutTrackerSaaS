@@ -5,15 +5,18 @@ const passportConfig = require('../Config/passport');
 const JWT = require('jsonwebtoken');
 const User = require('../Models/Users');
 const Workout = require('../Models/Workouts');
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.stripe);
+
 var cors = require('cors')
 
 apiRouter.use(cors({ origin: 'http://localhost:3000' }));
 
 const signToken = userID => {
     return JWT.sign({
-        iss: "Workout",
+        iss: "WorkoutSaaS",
         sub: userID
-    }, "WorkoutTracker", { expiresIn: "24h" });
+    }, process.env.JwtSecret, { expiresIn: "24h" });
 }
 
 //Registeration
@@ -70,7 +73,7 @@ apiRouter.get('/logout', passport.authenticate('jwt', { session: false }), (req,
 
 //Create a workout
 apiRouter.post('/workout', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const newWorkout = new Workout(req.body.workout);
+    const newWorkout = new Workout(req.body);
     newWorkout.save(err => {
         if (err) {
             res.status(500).json({ message: 'an unexpected error occured' })
@@ -145,11 +148,26 @@ apiRouter.delete('/workout', passport.authenticate('jwt', { session: false }), (
 });
 
 
-
-
 //PAYMENT
 
 //Single payment
+
+apiRouter.post('/create-payment-intent', passport.authenticate('jwt', { session: false }), async(req, res) => {
+    console.log('henlo')
+    const { items } = req.body;
+
+    //Create payment intent
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: 1000,
+        currency: "usd"
+    })
+
+    res.send({
+        clientSecret: paymentIntent.client_secret
+      });
+})
+
+
 
 
 

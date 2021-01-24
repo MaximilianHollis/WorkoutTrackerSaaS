@@ -6,11 +6,12 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../Models/Users');
 
 passport.use(new JwtStrategy({
-    issuer: "Workout",
-    secretOrKey: "WorkoutTracker",
+    issuer: "WorkoutSaaS",
+    secretOrKey: process.env.JwtSecret,
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 
 }, async(payload, done) => {
+    console.log(payload)
     await User.findById({ _id: payload.sub }, (err, user) => {
         if (err)
             return done(err, false);
