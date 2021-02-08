@@ -11,7 +11,6 @@ passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 
 }, async(payload, done) => {
-    console.log(payload)
     await User.findById({ _id: payload.sub }, (err, user) => {
         if (err)
             return done(err, false);

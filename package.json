@@ -28,6 +28,7 @@
   "homepage": "https://github.com/MaximilianHollis/WorkoutTrackerSaaS#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "cssesc": "^3.0.0",
@@ -45,6 +46,8 @@
     "use-local-storage-state": "^6.0.3"
   },
   "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-plugin-react": "^7.22.0",
     "nodemon": "^2.0.7"
   }
 }

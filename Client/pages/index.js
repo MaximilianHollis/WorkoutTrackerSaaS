@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import AuthService from '../src/Services/AuthService';
+import Link from 'next/link'
+
 
 const Title = styled.h1`
   font-size: 50px;
@@ -16,7 +18,9 @@ export default function Home() {
   return <>
     <button onClick={onSubmit}>register</button>
     <button onClick={onSubmit}>register</button>
-    <button onClick={onSubmit}>log in</button>
+    <Link href="/authentication">
+          <a>log in</a>
+        </Link>
     <button onClick={onSubmit}>log out</button>
 
   
