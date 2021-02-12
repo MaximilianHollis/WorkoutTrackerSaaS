@@ -10,13 +10,30 @@ const stripe = Stripe(process.env.stripe);
 const bodyParser = require('body-parser');
 
 
-var cors = require('cors');
+// Use JSON parser for all non-webhook routes
+/* apiRouter.use((req, res, next) => {
+	if (req.originalUrl === '/webhook') {
+	  next();
+	} else {
+	  bodyParser.json()(req, res, next);
+	}
+  }); */
 
+  apiRouter.use(bodyParser.json({
+	  verify: (req, res, buf) => {
+		  req.rawBody = buf
+	  }
+  }));
+
+  apiRouter.use(bodyParser.urlencoded({extended: false}))
+
+
+var cors = require('cors');
 apiRouter.use(cors({ origin: 'http://localhost:3000' }));
 /* apiRouter.use(bodyParser.json({
-    verify: (req, res, buf) => {
-        req.rawBody = buf
-    }
+	verify: (req, res, buf) => {
+		req.rawBody = buf
+	}
 }));
  */
 const signToken = userID => {
@@ -184,7 +201,7 @@ apiRouter.post('/sub', async (req, res) => {
 
 	const subscription = await stripe.subscriptions.create({
 		customer: customer.id,
-		items: [{ plan: 'plan_G......' }],
+		items: [{ plan: 'price_1IDCIqByoYw9YHw8ziDMuqkY' }],
 		expand: ['latest_invoice.payment_intent']
 	});
 
@@ -196,46 +213,45 @@ apiRouter.post('/sub', async (req, res) => {
 
 
 //CHANGE DURING PROD
-const endpointSecret = 'whsec_U64pWdlUkYOl15ZbNKiUkr2cWPvUmoV1';
+const webhookSecret = 'whsec_U64pWdlUkYOl15ZbNKiUkr2cWPvUmoV1';
 
 
 //STRIPE WEBHOOK
-apiRouter.post('/webhook', bodyParser.raw({ type: 'application/json' }), (req, res) => {
-	let event;
+// Match the raw body to content type application/json
+apiRouter.post('/webhook', (req, res) => {
 	const sig = req.headers['stripe-signature'];
+	let event;
+
 	try {
-		event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-		console.log(event);
-		switch (event.type) {
-		case 'payment_intent.succeeded':
-			console.log('yAy');
-			break;
-		default:
-			console.log('someting went wrong');
-		}
-	} catch (err) {
-		console.log(err);
-		res.status(400).send(`Webhook Error: ${err.message}`);
+		//event = stripe.webhooks.constructEvent(req.rawBody, sig, webhookSecret);
+		event = req.body
+	}
+	catch (err) {
+		console.log(err)
+	  	return res.status(400).send(`Webhook Error: ${err.message}`);
 	}
 
+  
 	// Handle the event
-	/*  switch (event.type) {
-       case 'payment_intent.succeeded':
-         const paymentIntent = event.data.object;
-         console.log('PaymentIntent was successful!');
-         break;
-       case 'payment_method.attached':
-         const paymentMethod = event.data.object;
-         console.log('PaymentMethod was attached to a Customer!');
-         break;
-       // ... handle other event types
-       default:
-         console.log(`Unhandled event type ${event.type}`);
-     }
-    */
-	// Return a 200 response to acknowledge receipt of the event
-	res.json({ received: true });
-});
+	switch (event.type) {
+	  case 'payment_intent.succeeded':
+		const paymentIntent = event.data.object;
+		console.log(paymentIntent);
+		console.log('PaymentIntent was successful!');
+		break;
+	  case 'payment_method.attached':
+		const paymentMethod = event.data.object;
+		console.log('PaymentMethod was attached to a Customer!');
+		break;
+	  // ... handle other event types
+	  default:
+		console.log(`Unhandled event type ${event.type}`);
+	}
+  
+	// Return a response to acknowledge receipt of the event
+	res.json({received: true});
+  });
+  
 
 
 
