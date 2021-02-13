@@ -5,6 +5,6 @@ import BottomNavbar from '../src/Components/Navbar/Navbar'
 export default function Dashboard() {
   return <>
     <DashboardPage/>
-    <BottomNavbar/>
+    <BottomNavbar activeTab={'dashboard'}/>
   </>
 }

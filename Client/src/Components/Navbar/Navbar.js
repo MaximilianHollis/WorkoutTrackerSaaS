@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { IoCompassSharp, IoTrophySharp } from 'react-icons/io5'
 import { GiWeightLiftingUp } from 'react-icons/gi'
 import { IconContext } from "react-icons";
+import useLocalStorageState from 'use-local-storage-state'
 
 import { Theme } from '../../globalStyles'
 import {
@@ -11,25 +12,24 @@ import {
 } from './Navbar.elements'
 
 
-export default function BottomNavBar() {
-    const [active, setActive] = useState('dashboard')
+export default function BottomNavBar({activeTab}) {
+    function Tab({ icon, name }) {
+    
+        return <IconContext.Provider value={{ color: Theme.darkPurple, size: '36' }}>
+            <NavLink href={'/' + name} active={activeTab  ? activeTab == name : false}>
+                {icon}
+            </NavLink>
+        </IconContext.Provider>
+    }
+
+
 
     return <NavbarWrapper>
         <TabWrapper>
-            <Tab active={active ? active == 'goals' : false} icon={<IoTrophySharp />} />
-            <Tab active={active ? active == 'dashboard' : false } icon={<IoCompassSharp />} />
-            <Tab active={active ? active == 'workouts': false} icon={<GiWeightLiftingUp />} />
-
+            <Tab icon={<IoTrophySharp />} name='goals'/>
+            <Tab icon={<IoCompassSharp />} name='dashboard'/>
+            <Tab icon={<GiWeightLiftingUp />} name='workouts' />
         </TabWrapper>
     </NavbarWrapper>
 }
 
-function Tab({ icon, active }) {
-    return <IconContext.Provider value={{ color: Theme.darkPurple, size: '36' }}>
-        <NavLink href='/dashboard' active={active}>
-            {icon}
-        </NavLink>
-    </IconContext.Provider>
-
-
-}

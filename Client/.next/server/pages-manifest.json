@@ -1,5 +1,12 @@
 {
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
-  "/_error": "pages/_error.js"
+  "/authentication": "pages/authentication.html",
+  "/dashboard": "pages/dashboard.html",
+  "/goals": "pages/goals.html",
+  "/": "pages/index.html",
+  "/plans": "pages/plans.html",
+  "/workouts": "pages/workouts.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html"
 }
