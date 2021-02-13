@@ -213,7 +213,7 @@ apiRouter.post('/sub', async (req, res) => {
 
 
 //CHANGE DURING PROD
-const webhookSecret = 'whsec_U64pWdlUkYOl15ZbNKiUkr2cWPvUmoV1';
+const webhookSecret = process.env.webhookSecret;
 
 
 //STRIPE WEBHOOK
