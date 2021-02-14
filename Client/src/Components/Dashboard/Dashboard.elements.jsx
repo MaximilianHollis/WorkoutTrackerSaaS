@@ -33,7 +33,6 @@ export const DashboardContainer = styled.div`
 
 export const GreetingContainer = styled.div`
     padding: 5%;
-    margin-bottom: 5%;
 `
 
 export const TimeOfDay = styled.h2`
@@ -47,41 +46,59 @@ export const Username = styled.h2`
     color: ${Theme.purple};
 `
 
-export const HighlightContainer = styled.div`
-    padding: 2%;
-    position: relative;
-`
-
-export const HighlightCard = styled.div`
-    background-color: white;
-    border-radius: 20px;
+export const DailyWorkoutContainer = styled.div`
     width: 100%;
-    height: 40vh;
-    box-shadow: ${Theme.purple + 50} 0px 6px 16px 0px;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 10px 20px 20px 10px;
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 3px;
+    } 
 `
 
-export const HighlightImg = styled.img`
-    background-color: white;
+export const PickADay = styled.div`
     border-radius: 20px;
-    width: 100%;
+    background: ${Theme.purple + 20};
+    height: 80px;
+    margin-right: 15px;
+    box-shadow: 0 4px 8px ${Theme.purple + 10};
+
+    ${({active}) => active && `
+        background: ${Theme.purple + 50};
+        box-shadow: 0 5px 10px ${Theme.purple + 50};
+        transition: 0.3s;
+    `}
 `
 
-export const HighlightCardTitle = styled.div`
-    border-radius: 20px;
-    height: 20vh;
-    clip-path: polygon(0% 100%, 0% 35%, 0.3% 33%, 1% 31%, 1.5% 30%, 2% 29%, 2.5% 28.4%, 3% 27.9%, 3.3% 27.6%, 5% 27%, 95% 0%, 100% 0%, 100% 100%);
-    background: linear-gradient(to top, ${Theme.purple}, rgb(148, 110, 214, .99));
-    transform: translateY(-46px);
+export const PickADayContent = styled.div`
+    width: 70px;
+    padding-top: 5px;
 `
 
-export const HighlightCardIcon = styled.img`
-    height: 100px;
-    width: 100px;
-    border-radius: 10px;
-    position: absolute;
-    z-index: 999;
-    bottom: 0;
-    left: 0;
-    transform: translate(30px, -110px);
-    box-shadow: ${Theme.purple + 50} 0px 6px 16px 0px;
+export const PickADayHeader = styled.h2`
+    width: 50%;
+    font-weight: normal;
+    font-size: 30px;
+    margin: auto;
+    color: white;
+`
+
+export const PickADayDate = styled.h3`
+    width: 50%;
+    font-weight: lighter;
+    font-size: 20px;
+    margin: auto;
+    color: white;
 `

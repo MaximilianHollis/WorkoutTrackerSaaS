@@ -14,10 +14,11 @@ export const MenuWrapper = styled.div`
     right: 0;
     z-index: 999;
     padding: 10px;
-    background-color: ${Theme.purple + 90};
+    background: ${Theme.purple + 20};
+    box-shadow: 0 5px 10px ${Theme.purple + 10};
     width: 100px;
     height: 100px;
-    border-radius: 0% 0% 0% 50%;
+    border-radius: 50% 0% 0% 50%;
 `
 
 export const MenuButton = styled.div`
