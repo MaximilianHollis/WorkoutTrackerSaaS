@@ -13,7 +13,7 @@ export const NavbarWrapper = styled.div`
     background-color: #fff;
     position: fixed;
     bottom: 0;
-    height: 100px;
+    height: 75px;
     width: 100%;
     padding: 0% 0% 10% 0%;
 `
