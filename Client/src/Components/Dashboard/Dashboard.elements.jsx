@@ -6,13 +6,13 @@ export const DashboardWrapper = styled.div`
     position: fixed;
     top: 0px;
     width: 100%;
-    height: 50vh;
+    height: 20vh;
     background-color: ${Theme.darkPurple};
     z-index: 0;
 `
 
 export const DashboardImg = styled.div`
-    height: 50vh;
+    height: 80vh;
     background-image: ${({ backgroundImg }) => (backgroundImg ? `url(${backgroundImg})` : null)};
     background-position: top;
     background-size: auto;
@@ -78,7 +78,7 @@ export const PickADay = styled.div`
     ${({active}) => active && `
         background: ${Theme.purple + 50};
         box-shadow: 0 5px 10px ${Theme.purple + 50};
-        transition: 0.3s;
+        transition: 1s;
     `}
 `
 

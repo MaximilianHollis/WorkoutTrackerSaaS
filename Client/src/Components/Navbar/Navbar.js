@@ -14,7 +14,6 @@ import {
 
 export default function BottomNavBar({activeTab}) {
     function Tab({ icon, name }) {
-    
         return <IconContext.Provider value={{ color: Theme.darkPurple, size: '36' }}>
             <NavLink href={'/' + name} active={activeTab  ? activeTab == name : false}>
                 {icon}
