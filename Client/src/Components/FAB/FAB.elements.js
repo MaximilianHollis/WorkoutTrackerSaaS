@@ -14,7 +14,7 @@ export const MenuWrapper = styled.div`
     right: 0;
     z-index: 999;
     padding: 10px;
-    background-color: ${Theme.purple + 50};
+    background-color: ${Theme.purple + 90};
     width: 100px;
     height: 100px;
     border-radius: 0% 0% 0% 50%;
@@ -30,7 +30,7 @@ export const ProfileImg = styled.img`
     position: fixed;
     top: 12px;
     right: 12px;
-    background-color: ${Theme.purple + 50};
+    background-color: ${Theme.purple + 90};
     border-radius: 50%;
     width: 74px;
     height: 74px;

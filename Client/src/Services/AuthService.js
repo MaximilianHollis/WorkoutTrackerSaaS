@@ -40,7 +40,6 @@
                 'Authorization': 'Bearer ' + user.token
             }
         }).then(res => {
-                console.log(res)
                 if (res.status !== 401)
                     return res.json().then(data => data);
                 else

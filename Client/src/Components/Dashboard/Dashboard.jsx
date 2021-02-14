@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import DashboardBackground from '../../../public/images/DashboardBackground.svg'
+import WorkingOut from '../../../public/images/WorkingOut.svg'
+import Subutai from '../../../public/images/subutai.png'
 
 import {
     DashboardWrapper,
@@ -7,7 +9,12 @@ import {
     DashboardContainer,
     GreetingContainer,
     TimeOfDay,
-    Username
+    Username,
+    HighlightContainer,
+    HighlightCard,
+    HighlightImg,
+    HighlightCardTitle,
+    HighlightCardIcon
 } from './Dashboard.elements'
 
 export default function DashboardPage() {
@@ -18,9 +25,14 @@ export default function DashboardPage() {
             <GreetingContainer>
                 <TimeOfDay>Good Evening, </TimeOfDay>
                 <Username>Sübügätäi</Username>
-
             </GreetingContainer>
-
+            <HighlightContainer>
+                <HighlightCard >
+                    <HighlightImg src={WorkingOut}/>
+                    <HighlightCardTitle />
+                    <HighlightCardIcon src={Subutai}/>
+                </HighlightCard>
+            </HighlightContainer>
         </DashboardContainer>
 
     </>

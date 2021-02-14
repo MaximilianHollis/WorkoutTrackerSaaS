@@ -16,6 +16,7 @@ export const NavbarWrapper = styled.div`
     height: 75px;
     width: 100%;
     padding: 0% 0% 10% 0%;
+    z-index: 999;
 `
 
 export const TabWrapper = styled.div`
@@ -32,7 +33,7 @@ export const TabWrapper = styled.div`
 
 export const NavLink = styled(StyledLink)`
     ${({ active }) => active && `
-        border-bottom: 6px solid ${Theme.darkPurple};
+        border-bottom: 6px solid ${Theme.purple};
         border-bottom-left-radius: 10%;
         border-bottom-right-radius: 10%;
     `}

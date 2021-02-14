@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { MdMenu } from 'react-icons/md'
-import defaultProfile from '../../../public/images/default.svg'
+import defaultProfile from '../../../public/images/subutai.png'
 
 import { Theme } from '../../globalStyles'
 import {

@@ -25,6 +25,10 @@ const GlobalStyle = createGlobalStyle`
     background: #696fff;
     border-radius: 10px;
   }
+  body
+{
+  overscroll-behavior-y: contain;
+}
  } 
 `;
 
@@ -60,10 +64,10 @@ export const Theme = {
   purple: '#767ED9',
   darkPurple: '#1c1e32'
 
-/*   background: '#1c1e32',
-  success: '#38D86A',
-  error: '#e6565e' */
-  
+  /*   background: '#1c1e32',
+    success: '#38D86A',
+    error: '#e6565e' */
+
 }
 
 export default GlobalStyle;
