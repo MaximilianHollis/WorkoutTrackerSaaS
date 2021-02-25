@@ -19,21 +19,29 @@ import {
 } from './Dashboard.elements'
 
 export default function DashboardPage() {
-    const [activeDay, setActiveDay] = useState('Sun');
     const { date } = useContext(DateContext)
 
-
     function Dates({ activeDay }) {
+        const [active, setActive] = useState(activeDay);
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const monthsOfYear = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-        console.log(date)
+        let indexBuffer = daysOfWeek.findIndex(day => day == date.dayOfWeek)
+
+        while (indexBuffer < 2) {
+            daysOfWeek.unshift(daysOfWeek.pop());
+            indexBuffer++;
+        }
+
+        while (indexBuffer > 2) {
+            daysOfWeek.push(daysOfWeek.shift());
+            indexBuffer--;
+        }
 
         return <>
             {daysOfWeek.map((day, index) => {
-                return <PickADay active={activeDay == day} onClick={() => setActiveDay(daysOfWeek[index])} key={day}>
+                return <PickADay active={active == day} onClick={() => setActive(daysOfWeek[index])} key={day}>
                     <PickADayContent>
-                        <PickADayHeader>{index + 14}</PickADayHeader>
+                        <PickADayHeader>{index + parseFloat(date.day) - indexBuffer}</PickADayHeader>
                         <PickADayDate>{day.slice(0, 3)}</PickADayDate>
                     </PickADayContent>
                 </PickADay>
@@ -46,11 +54,14 @@ export default function DashboardPage() {
         <DashboardImg backgroundImg={DashboardBackground} />
         <DashboardContainer>
             <GreetingContainer>
-                <TimeOfDay>Good {date.timeOfDay}, </TimeOfDay>
-                <Username>Sübügätäi</Username>
+                <TimeOfDay>Good {date.timeOfDay},</TimeOfDay>
+                <Username>Sübügätäi </Username>
+
             </GreetingContainer>
             <DailyWorkoutContainer>
-                <Dates activeDay={activeDay} />
+                <Dates activeDay={date.dayOfWeek} />
+
+
             </DailyWorkoutContainer>
         </DashboardContainer>
     </>

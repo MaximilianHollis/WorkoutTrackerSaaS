@@ -36,6 +36,8 @@ apiRouter.use(cors({ origin: 'http://localhost:3000' }));
 	}
 }));
  */
+
+ 
 const signToken = userID => {
 	return JWT.sign({
 		iss: 'WorkoutSaaS',

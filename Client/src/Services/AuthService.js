@@ -3,7 +3,7 @@
         if(!user){
             return
         }
-        return fetch('http://localhost:5000/api/login', {
+        return fetch('http://192.168.0.109:5000/api/login', {
             method: "post",
             body: JSON.stringify(user),
             headers: {
@@ -17,8 +17,7 @@
         })
     },
     register: user => {
-        console.log(user);
-        return fetch('http://localhost:5000/api/register', {
+        return fetch('http://192.168.0.109:5000/api/register', {
             method: "post",
             body: JSON.stringify(user),
             headers: {
@@ -28,12 +27,12 @@
             .then(data => data);
     },
     logout: () => {
-        return fetch('http://localhost:5000/api/logout')
+        return fetch('http://192.168.0.109:5000/api/logout')
             .then(res => res.json())
             .then(data => data);
     },
     authenticate: (user) => {
-        return fetch('http://localhost:5000/api/authenticated', {
+        return fetch('http://192.168.0.109:5000/api/authenticated', {
             method: "get",
             headers: {
                 'Content-Type': 'application/json',

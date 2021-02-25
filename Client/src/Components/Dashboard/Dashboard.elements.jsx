@@ -78,7 +78,8 @@ export const PickADay = styled.div`
     ${({active}) => active && `
         background: ${Theme.purple + 50};
         box-shadow: 0 5px 10px ${Theme.purple + 50};
-        transition: 1s;
+        transition: .1s;
+        transition-timing-function: ease-in-out;
     `}
 `
 
